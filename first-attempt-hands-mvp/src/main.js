@@ -95,10 +95,13 @@ async function handleClick(event) {
   event.target.parentNode.appendChild(canvas);
   const cxt = canvas.getContext("2d");
   for (const landmarks of handLandmarkerResult.landmarks) {
+   
     drawConnectors(cxt, landmarks, HAND_CONNECTIONS, {
       color: "#00FF00",
       lineWidth: 5
+      
     });
+
     drawLandmarks(cxt, landmarks, { color: "#FF0000", lineWidth: 1 });
   }
 }
@@ -153,6 +156,8 @@ function enableCam(event) {
 
 let lastVideoTime = -1;
 let results = undefined;
+
+
 console.log(video);
 async function predictWebcam() {
   canvasElement.style.width = video.videoWidth;
@@ -179,6 +184,8 @@ async function predictWebcam() {
         color: "#00FF00",
         lineWidth: 5
       });
+      let pointerFingertip = landmarks[8]
+      console.log(`x: ${pointerFingertip.x.toFixed(3)}, y: ${pointerFingertip.y.toFixed(3)}`)
       drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
     }
   }
