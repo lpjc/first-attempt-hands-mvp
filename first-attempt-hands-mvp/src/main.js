@@ -62,18 +62,19 @@ for (let i = 0; i < imageContainers.length; i++) {
 
 function checkCollision(fingertip, element) {
   const rect = element.getBoundingClientRect();
+  const videoRect = video.getBoundingClientRect();
 
-  // Transform the normalized fingertip coordinates to viewport coordinates (in pixels)
-  const x = fingertip.x * video.innerWidth;
-  const y = fingertip.y * window.innerHeight;
+  // Transform the normalized fingertip coordinates to video size coordinates (in pixels)
+  const x = fingertip.x * video.videoWidth;
+  const y = fingertip.y * video.videoHeight;
 
   console.log(rect, " col X: "+x, " col Y: " + y);
 
   if (
-    x >= rect.left &&
-    x <= rect.right &&
-    y >= rect.top &&
-    y <= rect.bottom
+    x >= rect.left - videoRect.left &&
+    x <= rect.right - videoRect.left &&
+    y >= rect.top - videoRect.top &&
+    y <= rect.bottom - videoRect.top
   ) {
     console.log("Collision!")
     return true; 
