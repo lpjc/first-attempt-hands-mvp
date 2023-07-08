@@ -90,7 +90,7 @@ function checkCollision(fingertip, element) {
 const video = document.getElementById("webcam");
 const canvasElement = document.getElementById("output_canvas");
 const canvasCtx = canvasElement.getContext("2d");
-const myDiv = document.getElementById("myDiv")
+let myDiv = document.getElementById("myDiv")
 
 // Check if webcam access is supported.
 const hasGetUserMedia = () => !!navigator.mediaDevices?.getUserMedia;
@@ -103,6 +103,44 @@ if (hasGetUserMedia()) {
 } else {
   console.warn("getUserMedia() is not supported by your browser");
 }
+
+function generateRandomShape() {
+  let randomShape = Math.floor(Math.random() * 3); // 3 shapes - square, circle, triangle
+  let newDiv = document.createElement("div"); // Create a new div element
+
+  // Assign the new div the id of "myDiv"
+  newDiv.id = "myDiv";
+
+  // Assign properties based on the random shape
+  switch(randomShape) {
+    case 0: // square
+      newDiv.style.width = "100px";
+      newDiv.style.height = "100px";
+      break;
+    case 1: // circle
+      newDiv.style.width = "100px";
+      newDiv.style.height = "100px";
+      newDiv.style.borderRadius = "50%";
+      break;
+    case 2: // triangle
+      newDiv.style.width = "0";
+      newDiv.style.height = "0";
+      newDiv.style.borderLeft = "50px solid transparent";
+      newDiv.style.borderRight = "50px solid transparent";
+      newDiv.style.borderBottom = "100px solid red";
+      break;
+  }
+
+  // Remove the old div from the DOM
+  myDiv.remove();
+
+  // Assign the newly created div to myDiv
+  myDiv = newDiv;
+
+  // Append the new div to the DOM
+  document.body.appendChild(myDiv);
+}
+document.getElementById("generateShapeBtn").addEventListener("click", generateRandomShape);
 
 // Enable the live webcam view and start detection.
 function enableCam(event) {
@@ -183,3 +221,4 @@ async function predictWebcam() {
     window.requestAnimationFrame(predictWebcam);
   }
 }
+
