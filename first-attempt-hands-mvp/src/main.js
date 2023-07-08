@@ -60,59 +60,36 @@ for (let i = 0; i < imageContainers.length; i++) {
   imageContainers[i].children[0].addEventListener("click", handleClick);
 }
 
-// When an image is clicked, let's detect it and display results!
-async function handleClick(event) {
- 
-  if (!handLandmarker) {
-    console.log("Wait for handLandmarker to load before clicking!");
-    return;
+function checkCollision(fingertip, element) {
+  const rect = element.getBoundingClientRect();
+
+  // Transform the normalized fingertip coordinates to viewport coordinates (in pixels)
+  const x = fingertip.x * video.innerWidth;
+  const y = fingertip.y * window.innerHeight;
+
+  console.log(rect, " col X: "+x, " col Y: " + y);
+
+  if (
+    x >= rect.left &&
+    x <= rect.right &&
+    y >= rect.top &&
+    y <= rect.bottom
+  ) {
+    console.log("Collision!")
+    return true; 
   }
-
-  if (runningMode === "VIDEO") {
-    runningMode = "IMAGE";
-    await handLandmarker.setOptions({ runningMode: "IMAGE" });
-  }
-
-  // We can call handLandmarker.detect as many times as we like with
-  // different image data each time. This returns a promise
-  // which we wait to complete and then call a function to
-  // print out the results of the prediction.
-  const handLandmarkerResult = handLandmarker.detect(event.target);
-  const canvas = document.createElement("canvas");
-  canvas.setAttribute("class", "canvas");
-  canvas.setAttribute("width", event.target.naturalWidth + "px");
-  canvas.setAttribute("height", event.target.naturalHeight + "px");
-  canvas.style =
-    "left: 0px;" +
-    "top: 0px;" +
-    "width: " +
-    event.target.width +
-    "px;" +
-    "height: " +
-    event.target.height +
-    "px;";
-
-  event.target.parentNode.appendChild(canvas);
-  const cxt = canvas.getContext("2d");
-  for (const landmarks of handLandmarkerResult.landmarks) {
-   
-    drawConnectors(cxt, landmarks, HAND_CONNECTIONS, {
-      color: "#00FF00",
-      lineWidth: 5
-      
-    });
-
-    drawLandmarks(cxt, landmarks, { color: "#FF0000", lineWidth: 1 });
-  }
+  return false;
 }
 
+
 /********************************************************************
-// Demo 2: Continuously grab image from webcam stream and detect it.
+// Continuously grab image from webcam stream and detect it.
 ********************************************************************/
 
 const video = document.getElementById("webcam");
 const canvasElement = document.getElementById("output_canvas");
 const canvasCtx = canvasElement.getContext("2d");
+const myDiv = document.getElementById("myDiv")
 
 // Check if webcam access is supported.
 const hasGetUserMedia = () => !!navigator.mediaDevices?.getUserMedia;
@@ -128,7 +105,7 @@ if (hasGetUserMedia()) {
 
 // Enable the live webcam view and start detection.
 function enableCam(event) {
-  console.log('image clicked!')
+
   if (!handLandmarker) {
     console.log("Wait! objectDetector not loaded yet.");
     return;
@@ -165,6 +142,7 @@ async function predictWebcam() {
   canvasElement.width = video.videoWidth;
   canvasElement.height = video.videoHeight;
   
+  
   // Now let's start detecting the stream.
   if (runningMode === "IMAGE") {
     runningMode = "VIDEO";
@@ -174,19 +152,27 @@ async function predictWebcam() {
   if (lastVideoTime !== video.currentTime) {
     lastVideoTime = video.currentTime;
     results = handLandmarker.detectForVideo(video, startTimeMs);
+    
   }
 
   canvasCtx.save();
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
   if (results.landmarks) {
+    
     for (const landmarks of results.landmarks) {
       drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
         color: "#00FF00",
         lineWidth: 5
       });
       let pointerFingertip = landmarks[8]
-      console.log(`x: ${pointerFingertip.x.toFixed(3)}, y: ${pointerFingertip.y.toFixed(3)}`)
+      console.log(`real x: ${pointerFingertip.x.toFixed(3)}, real y: ${pointerFingertip.y.toFixed(3)}`)
       drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
+
+      if (checkCollision(pointerFingertip, myDiv)) {
+        myDiv.style.backgroundColor = 'blue';
+      } else {
+        myDiv.style.backgroundColor = 'red';
+      }
     }
   }
   canvasCtx.restore();

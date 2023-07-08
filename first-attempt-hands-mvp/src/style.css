@@ -21,6 +21,7 @@ body {
   --mdc-theme-on-primary: #f1f3f4;
 }
 
+
 h1 {
   color: #007f8b;
 }
@@ -36,9 +37,7 @@ em {
 video {
   clear: both;
   display: block;
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-  -moz-transform: rotateY(180deg);
+
 }
 
 section {
@@ -49,6 +48,17 @@ section {
 header,
 footer {
   clear: both;
+}
+
+#myDiv {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10%;
+  height: 10%;
+  background-color: red;
+  z-index: 99999;
 }
 
 .removed {
@@ -68,9 +78,10 @@ footer {
 .detectOnClick {
   position: relative;
   float: left;
-  width: 48%;
+  width: 49%;
   margin: 2% 1%;
   cursor: pointer;
+  
 }
 
 .videoView p,
@@ -96,12 +107,12 @@ footer {
   z-index: 1;
   position: absolute;
   pointer-events: none;
+  
+
 }
 
 .output_canvas {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-  -moz-transform: rotateY(180deg);
+  width: 100%;
 }
 
 .detectOnClick {
