@@ -123,12 +123,10 @@ function generateRandomShape() {
       newDiv.style.borderRadius = "50%";
       break;
     case 2: // triangle
-      newDiv.style.width = "0";
-      newDiv.style.height = "0";
-      newDiv.style.borderLeft = "50px solid transparent";
-      newDiv.style.borderRight = "50px solid transparent";
-      newDiv.style.borderBottom = "100px solid red";
-      break;
+    newDiv.style.width = "100px";
+    newDiv.style.height = "100px";
+    newDiv.style.borderRadius = "10%";
+    break;
   }
 
   // Remove the old div from the DOM
@@ -136,12 +134,18 @@ function generateRandomShape() {
 
   // Assign the newly created div to myDiv
   myDiv = newDiv;
-
+  myDiv.style.width = "10%"
+  myDiv.style.height = "10%"
+  myDiv.style.top = Math.floor(Math.random() * 100) + 1 + '%'
+  myDiv.style.left = Math.floor(Math.random() * 100) + 1 + '%'
+  
   // Append the new div to the DOM
-  document.body.appendChild(myDiv);
+  const videoContainer = document.getElementById("videoContainer")
+  videoContainer.appendChild(myDiv);
 }
 document.getElementById("generateShapeBtn").addEventListener("click", generateRandomShape);
 
+  // Start the movement
 // Enable the live webcam view and start detection.
 function enableCam(event) {
 
