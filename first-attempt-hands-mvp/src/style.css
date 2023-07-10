@@ -37,7 +37,6 @@ em {
 video {
   clear: both;
   display: block;
-
 }
 
 section {
@@ -56,7 +55,7 @@ footer {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: red;
-  z-index: 99999;
+  z-index: 2;
 }
 
 .removed {
@@ -71,6 +70,8 @@ footer {
   font-style: italic;
   font-size: 130%;
 }
+
+
 
 .videoView,
 .detectOnClick {
@@ -91,7 +92,7 @@ footer {
   border: 1px dashed rgba(255, 255, 255, 0.7);
   z-index: 2;
   font-size: 12px;
-  margin: 0;
+  margin: 0;  
 }
 
 .highlighter {
@@ -102,15 +103,14 @@ footer {
 }
 
 .canvas {
-  z-index: 1;
+  z-index: 3;
   position: absolute;
   pointer-events: none;
-  
-
 }
 
 .output_canvas {
   width: 100%;
+  z-index: 3;
 }
 
 .detectOnClick {
