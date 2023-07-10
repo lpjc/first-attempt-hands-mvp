@@ -71,8 +71,6 @@ footer {
   font-size: 130%;
 }
 
-
-
 .videoView,
 .detectOnClick {
   position: relative;
@@ -80,7 +78,6 @@ footer {
   width: 49%;
   margin: 2% 1%;
   cursor: pointer;
-  
 }
 
 .videoView p,
