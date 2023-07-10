@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 
 <body>
-  <h1>Hand landmark detection using the MediaPipe HandLandmarker task</h1>
+  <h1>MVP for Gesture Plugin </h1>
   
   <section id="demos" class="invisible">
     
@@ -17,7 +17,12 @@
         <span class="mdc-button__label">ENABLE WEBCAM</span>
       </button>
       <button id="generateShapeBtn">Generate Shape</button>
-      <div id="videoContainer" style="position: relative; width: fit-content;">
+      <div id="videoContainer" 
+        style="position: relative; 
+        width: fit-content; 
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);"
+      >
         <video id="webcam" style="position: abso" autoplay playsinline></video>
         <canvas class="output_canvas" id="output_canvas" style="position: absolute; left: 0px; top: 0px;"></canvas>
         <div id="myDiv"></div>

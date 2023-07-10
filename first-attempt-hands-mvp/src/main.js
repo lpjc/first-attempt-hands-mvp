@@ -209,7 +209,7 @@ async function predictWebcam() {
       });
       let pointerFingertip = landmarks[8]
       console.log(`real x: ${pointerFingertip.x.toFixed(3)}, real y: ${pointerFingertip.y.toFixed(3)}`)
-      drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
+      drawLandmarks(canvasCtx, landmarks, { color: "#FFFF00", lineWidth: 1 });
 
       if (checkCollision(pointerFingertip, myDiv)) {
         myDiv.style.backgroundColor = 'blue';
