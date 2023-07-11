@@ -12,17 +12,14 @@
     
    
     <div id="liveView" class="videoView">
+
       <button id="webcamButton" class="mdc-button mdc-button--raised">
         <span class="mdc-button__ripple"></span>
         <span class="mdc-button__label">ENABLE WEBCAM</span>
       </button>
       <button id="generateShapeBtn">Generate Shape</button>
-      <div id="videoContainer" 
-        style="position: relative; 
-        width: fit-content; 
-        -webkit-transform: scaleX(-1);
-        transform: scaleX(-1);"
-      >
+
+      <div id="videoContainer" style="position: relative; width: fit-content; transform: scaleX(-1);">
         <video id="webcam" style="position: abso" autoplay playsinline></video>
         <canvas class="output_canvas" id="output_canvas" style="position: absolute; left: 0px; top: 0px;"></canvas>
         <div id="myDiv"></div>

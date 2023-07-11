@@ -19,6 +19,7 @@ body {
   color: #3d3d3d;
   --mdc-theme-primary: #007f8b;
   --mdc-theme-on-primary: #f1f3f4;
+  background-color: #e4e4e4;
 }
 
 
@@ -51,9 +52,8 @@ footer {
 
 #myDiv {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 10%;
+  height: 10%;
   background-color: red;
   z-index: 2;
 }
